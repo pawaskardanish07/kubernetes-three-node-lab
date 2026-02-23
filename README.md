@@ -39,15 +39,19 @@ sudo apt update
 ```bash
 sudo apt install -y containerd
 ```
-
-<img width="1880" height="488" alt="Screenshot 2026-02-23 133616" src="https://github.com/user-attachments/assets/d5f7d20b-2801-4cb0-ba4d-8bec9f604022" />
-
 ```bash
 sudo mkdir -p /etc/containerd
 ```
 ```bash
 containerd config default | sudo tee /etc/containerd/config.toml
 ```
+```bash
+sudo systemctl status conatinerd
+```
+
+<img width="1880" height="488" alt="Screenshot 2026-02-23 133616" src="https://github.com/user-attachments/assets/cf945c93-94c1-4199-9c59-38465040cc9c" />
+
+
 Now *Edit the config.toml and Change: SystemdCgroup = true*
 
 <img width="1881" height="982" alt="Chnage Config file" src="https://github.com/user-attachments/assets/a426036b-5226-4089-9ad1-441d1b3d1562" />
@@ -62,5 +66,84 @@ sudo systemctl restart containerd
 ```bash
 sudo systemctl enable containerd
 ```
+
+---
+
+### Step 3 — Install Kubernetes Packages
+*Commands run on Master + Worker 1 + Worker 2:*
+```bash
+sudo apt update
+sudo apt install -y apt-transport-https ca-certificates curl gpg
+
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key \
+| sudo tee /etc/apt/keyrings/kubernetes-apt-keyring.asc
+
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.asc] \
+https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /" \
+| sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt update
+sudo apt install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+```
+
+*kubeadm version status:*
+
+<img width="1887" height="70" alt="Screenshot 2026-02-23 134849" src="https://github.com/user-attachments/assets/cb9b7ea3-0b58-43ed-9681-e2225c5a733b" />
+
+*kubectl version --client status:*
+
+<img width="1388" height="73" alt="Screenshot 2026-02-23 134739" src="https://github.com/user-attachments/assets/bce87c73-cc00-454e-b936-0f0e9a6059e7" />
+
+---
+
+### Step 4 — Initialize Control Plane (Master)
+*Commands run only Master server*
+```bash
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+```
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+<img width="1889" height="464" alt="Screenshot 2026-02-23 135633" src="https://github.com/user-attachments/assets/beb2d568-b486-4a84-a6fb-fe039c6cbf5f" />
+
+---
+
+### Step 5 — Install Network Plugin (Master)
+*Commands run only Master server*
+```bash
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+kubectl get pods -n kube-system
+```
+
+<img width="1121" height="252" alt="Screenshot 2026-02-23 140336" src="https://github.com/user-attachments/assets/6d1ba30a-c434-4d3e-a0d9-f860ab3016c2" />
+
+---
+
+### Step 6 — Join Worker Nodes
+*get kubeadm joine command from Master server*
+
+```bash
+kubeadm token create --print-join-command
+```
+
+*After that run this command on Worker Server*
+
+```bash
+sudo kubeadm join 10.10.3.68:6443 --token <token> \ --discovery-token-ca-cert-hash sha256:<hash>
+```
+
+*After that verify on Master Server*
+```bash
+kubectl get nodes
+```
+
+<img width="1082" height="112" alt="image" src="https://github.com/user-attachments/assets/d29f6c7e-d284-4d5c-949e-df25ef80589b" />
+
+
+
 
 
