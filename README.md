@@ -143,6 +143,33 @@ kubectl get nodes
 
 <img width="1082" height="112" alt="image" src="https://github.com/user-attachments/assets/d29f6c7e-d284-4d5c-949e-df25ef80589b" />
 
+---
+
+### Step 7 — Deploy Application on Plane Server
+*Commands run only Master server*
+```bash
+kubectl create deployment nginx-test --image=nginx --replicas=3
+kubectl get pods -o wide
+```
+
+<img width="1889" height="110" alt="Screenshot 2026-02-23 144429" src="https://github.com/user-attachments/assets/baaed750-4c39-4f37-8a55-fd7c3b871ce7" />
+
+---
+
+### Step 8 — Expose Application on Plane Server
+*Commands run only Master server*
+```bash
+kubectl expose deployment nginx-test --type=NodePort --port=80
+kubectl get svc
+```
+
+*Node Port:*
+
+<img width="1721" height="134" alt="Screenshot 2026-02-23 144730" src="https://github.com/user-attachments/assets/5e79507f-11d6-4063-8074-59a0ed1df17f" />
+
+*URL Acesss:*
+
+<img width="1595" height="852" alt="Screenshot 2026-02-23 145010" src="https://github.com/user-attachments/assets/b79df422-0066-4d2c-9709-3ca63e6adb98" />
 
 
 
