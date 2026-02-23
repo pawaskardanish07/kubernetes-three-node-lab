@@ -29,6 +29,7 @@ sudo sysctl --system
 
 <img width="1205" height="90" alt="Swap Status" src="https://github.com/user-attachments/assets/b5af56d3-617f-43df-bcad-0e0823477a73" />
 
+---
 
 ### Step 2 — Install Container Runtime
 *Commands run on Master + Worker 1 + Worker 2:*
