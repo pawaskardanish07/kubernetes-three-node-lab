@@ -239,8 +239,44 @@ kubectl get ingress
 
 <img width="1594" height="848" alt="Screenshot 2026-02-23 151805" src="https://github.com/user-attachments/assets/5e3c62e7-00cd-4ba5-a36b-9f65921b67ca" />
 
+---
 
-Thank you!
+## ✅ Outcome
+- A fully functional Kubernetes cluster with networking and application deployment.
+- Demonstrates NodePort and hostname access.
+- Optional ingress routing for production-style traffic management.
+
+---
+
+## 🚀 Future Work
+- Add TLS/HTTPS via Ingress.  
+- Deploy multiple apps and route via different paths/hosts.  
+- Automate setup with Ansible/Terraform.
+
+---
+
+## Capture Verification Outputs
+*After each major step, run a verification command and screenshot it:*
+
+    Step 1: free -h → shows swap disabled
+
+    Step 2: systemctl status containerd → shows containerd running
+
+    Step 3: kubectl version --client → shows kubectl installed
+
+    Step 4: kubectl get nodes → shows master node
+
+    Step 5: kubectl get pods -n kube-system → shows Calico pods
+
+    Step 6: kubectl get nodes → shows all nodes Ready
+
+    Step 7: kubectl get pods -o wide → shows nginx pods
+
+    Step 8: Browser screenshot → Nginx accessible via IP/NodePort
+
+    Step 9: Browser screenshot → Nginx accessible via hostname
+
+
 
 
 
