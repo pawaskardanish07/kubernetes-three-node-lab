@@ -124,7 +124,7 @@ kubectl get pods -n kube-system
 ---
 
 ### Step 6 — Join Worker Nodes
-*get kubeadm joine command from Master server*
+*get kubeadm joined command from Master server*
 
 ```bash
 kubeadm token create --print-join-command
@@ -168,8 +168,84 @@ kubectl get svc
 <img width="1721" height="134" alt="Screenshot 2026-02-23 144730" src="https://github.com/user-attachments/assets/5e79507f-11d6-4063-8074-59a0ed1df17f" />
 
 *URL Acesss:*
+- http://192.168.1.10:32188/
+- http://192.168.1.20:32188/
+- http://192.168.1.30:32188/
 
 <img width="1595" height="852" alt="Screenshot 2026-02-23 145010" src="https://github.com/user-attachments/assets/b79df422-0066-4d2c-9709-3ca63e6adb98" />
+
+---
+
+### Step 9 — Install Ingress Controller (Master Only) for URL access via hostname
+
+*Before check controller pods*
+```bash
+kubectl get pods -n ingress-nginx
+```
+
+<img width="1176" height="66" alt="Screenshot 2026-02-23 150052" src="https://github.com/user-attachments/assets/abe54197-0590-4f7a-8ca3-2290325be79e" />
+
+*After deploying Ingress controller*
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+```
+
+<img width="1883" height="446" alt="Screenshot 2026-02-23 145943" src="https://github.com/user-attachments/assets/9983f282-baf5-47f4-86c8-20c79911697f" />
+
+# Create Ingress Resource (Master Only)
+*Edit Ignress.yaml config file*
+```bash
+sudo nano ingress.yaml
+```
+
+```bash
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  namespace: default
+spec:
+  rules:
+  - host: nginx.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-test
+            port:
+              number: 80
+```
+
+*After save this file and apply ingress.yaml*
+```bash
+kubectl apply -f ingress.yaml
+```
+
+*Now check URL hostname*
+```bash
+kubectl get ingress
+```
+
+<img width="1046" height="134" alt="Screenshot 2026-02-23 150935" src="https://github.com/user-attachments/assets/e56b19d2-36b7-4c1c-8b12-463e75acaea0" />
+
+*Now check without DNS server edit host file in windows or where you can try to access nginx*
+*Add all server ip with ingress hostname*
+
+<img width="1442" height="617" alt="Screenshot 2026-02-23 151142" src="https://github.com/user-attachments/assets/ccb44bb6-d333-4308-b1fa-5af363f332cc" />
+
+*URL accessible via Hostname*
+
+<img width="1594" height="848" alt="Screenshot 2026-02-23 151805" src="https://github.com/user-attachments/assets/5e3c62e7-00cd-4ba5-a36b-9f65921b67ca" />
+
+
+Thank you!
+
+
+
+
+
 
 
 
