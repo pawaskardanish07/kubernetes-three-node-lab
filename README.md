@@ -27,7 +27,8 @@ sudo sysctl --system
 ```
 *Swap Disabled Status:*
 
-<img width="1205" height="90" alt="Swap Status" src="https://github.com/user-attachments/assets/b5af56d3-617f-43df-bcad-0e0823477a73" />
+<img width="989" height="92" alt="image" src="https://github.com/user-attachments/assets/e241f406-1e73-43e1-a134-7a754ee76671" />
+
 
 ---
 
@@ -49,12 +50,14 @@ containerd config default | sudo tee /etc/containerd/config.toml
 sudo systemctl status conatinerd
 ```
 
-<img width="1880" height="488" alt="Screenshot 2026-02-23 133616" src="https://github.com/user-attachments/assets/cf945c93-94c1-4199-9c59-38465040cc9c" />
+<img width="1847" height="489" alt="image" src="https://github.com/user-attachments/assets/7ba5ec8f-e9e4-4137-bb9a-1e0cb9036e4a" />
+
 
 
 Now *Edit the config.toml and Change: SystemdCgroup = true*
 
-<img width="1881" height="982" alt="Chnage Config file" src="https://github.com/user-attachments/assets/a426036b-5226-4089-9ad1-441d1b3d1562" />
+<img width="1235" height="983" alt="image" src="https://github.com/user-attachments/assets/1bdebf58-a985-4bfc-bada-4233ff798148" />
+
 
 
 After save this config file restart & enable containerd
@@ -89,11 +92,13 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 *kubeadm version status:*
 
-<img width="1887" height="70" alt="Screenshot 2026-02-23 134849" src="https://github.com/user-attachments/assets/cb9b7ea3-0b58-43ed-9681-e2225c5a733b" />
+<img width="1885" height="67" alt="image" src="https://github.com/user-attachments/assets/739f5737-3991-4386-a56c-3959cc3e36f6" />
+
 
 *kubectl version --client status:*
 
-<img width="1388" height="73" alt="Screenshot 2026-02-23 134739" src="https://github.com/user-attachments/assets/bce87c73-cc00-454e-b936-0f0e9a6059e7" />
+<img width="734" height="66" alt="image" src="https://github.com/user-attachments/assets/3c9afc0e-0275-4625-9281-10b6badc86a1" />
+
 
 ---
 
@@ -108,7 +113,8 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-<img width="1889" height="464" alt="Screenshot 2026-02-23 135633" src="https://github.com/user-attachments/assets/beb2d568-b486-4a84-a6fb-fe039c6cbf5f" />
+<img width="854" height="285" alt="image" src="https://github.com/user-attachments/assets/b1b6a707-b31b-4fb7-b152-30578e756411" />
+
 
 ---
 
@@ -119,7 +125,8 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 kubectl get pods -n kube-system
 ```
 
-<img width="1121" height="252" alt="Screenshot 2026-02-23 140336" src="https://github.com/user-attachments/assets/6d1ba30a-c434-4d3e-a0d9-f860ab3016c2" />
+<img width="952" height="245" alt="image" src="https://github.com/user-attachments/assets/587d1f44-93b6-4a61-ac1a-b2a61b0289a1" />
+
 
 ---
 
@@ -141,7 +148,8 @@ sudo kubeadm join 10.10.3.68:6443 --token <token> \ --discovery-token-ca-cert-ha
 kubectl get nodes
 ```
 
-<img width="1082" height="112" alt="image" src="https://github.com/user-attachments/assets/d29f6c7e-d284-4d5c-949e-df25ef80589b" />
+<img width="690" height="110" alt="image" src="https://github.com/user-attachments/assets/87ad494b-4b8f-40fe-99aa-43bea946cacf" />
+
 
 ---
 
@@ -152,7 +160,8 @@ kubectl create deployment nginx-test --image=nginx --replicas=3
 kubectl get pods -o wide
 ```
 
-<img width="1889" height="110" alt="Screenshot 2026-02-23 144429" src="https://github.com/user-attachments/assets/baaed750-4c39-4f37-8a55-fd7c3b871ce7" />
+<img width="956" height="202" alt="image" src="https://github.com/user-attachments/assets/919a0f27-48fd-4b5e-947b-cce1a70a1d76" />
+
 
 ---
 
@@ -165,7 +174,8 @@ kubectl get svc
 
 *Node Port:*
 
-<img width="1721" height="134" alt="Screenshot 2026-02-23 144730" src="https://github.com/user-attachments/assets/5e79507f-11d6-4063-8074-59a0ed1df17f" />
+<img width="945" height="126" alt="image" src="https://github.com/user-attachments/assets/79880faf-9236-49d7-bf53-a25e989ad75f" />
+
 
 *URL Acesss:*
 - http://192.168.1.10:32188/
