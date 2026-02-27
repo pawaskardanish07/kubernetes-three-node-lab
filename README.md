@@ -125,7 +125,8 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 kubectl get pods -n kube-system
 ```
 
-<img width="952" height="245" alt="image" src="https://github.com/user-attachments/assets/587d1f44-93b6-4a61-ac1a-b2a61b0289a1" />
+<img width="940" height="246" alt="image" src="https://github.com/user-attachments/assets/01d4e6fe-545c-4c8c-93a3-2748686355df" />
+
 
 
 ---
@@ -148,7 +149,8 @@ sudo kubeadm join 10.10.3.68:6443 --token <token> \ --discovery-token-ca-cert-ha
 kubectl get nodes
 ```
 
-<img width="690" height="110" alt="image" src="https://github.com/user-attachments/assets/87ad494b-4b8f-40fe-99aa-43bea946cacf" />
+<img width="681" height="110" alt="image" src="https://github.com/user-attachments/assets/fab71cf4-95d3-4e16-b767-5401d40f9206" />
+
 
 
 ---
@@ -160,7 +162,8 @@ kubectl create deployment nginx-test --image=nginx --replicas=3
 kubectl get pods -o wide
 ```
 
-<img width="956" height="202" alt="image" src="https://github.com/user-attachments/assets/919a0f27-48fd-4b5e-947b-cce1a70a1d76" />
+<img width="1295" height="94" alt="image" src="https://github.com/user-attachments/assets/00039f3d-6a0a-4bf7-be40-c86de707d74c" />
+
 
 
 ---
@@ -182,7 +185,8 @@ kubectl get svc
 - http://192.168.1.20:32188/
 - http://192.168.1.30:32188/
 
-<img width="1595" height="852" alt="Screenshot 2026-02-23 145010" src="https://github.com/user-attachments/assets/b79df422-0066-4d2c-9709-3ca63e6adb98" />
+<img width="1599" height="844" alt="image" src="https://github.com/user-attachments/assets/0cb78fe2-7881-4dbf-b73f-361b0f252eb1" />
+
 
 ---
 
@@ -193,14 +197,15 @@ kubectl get svc
 kubectl get pods -n ingress-nginx
 ```
 
-<img width="1176" height="66" alt="Screenshot 2026-02-23 150052" src="https://github.com/user-attachments/assets/abe54197-0590-4f7a-8ca3-2290325be79e" />
+<img width="939" height="68" alt="image" src="https://github.com/user-attachments/assets/82a1418a-d8f5-430e-86e0-0e25f27249b8" />
 
 *After deploying Ingress controller*
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
 ```
 
-<img width="1883" height="446" alt="Screenshot 2026-02-23 145943" src="https://github.com/user-attachments/assets/9983f282-baf5-47f4-86c8-20c79911697f" />
+<img width="1443" height="375" alt="image" src="https://github.com/user-attachments/assets/c00c5429-b51f-4a1a-af75-54a66c25aa04" />
+
 
 # Create Ingress Resource (Master Only)
 *Edit Ignress.yaml config file*
@@ -238,16 +243,19 @@ kubectl apply -f ingress.yaml
 kubectl get ingress
 ```
 
-<img width="1046" height="134" alt="Screenshot 2026-02-23 150935" src="https://github.com/user-attachments/assets/e56b19d2-36b7-4c1c-8b12-463e75acaea0" />
+<img width="798" height="132" alt="image" src="https://github.com/user-attachments/assets/7109c2d9-c231-459c-9b05-1d08fe57b292" />
+
 
 *Now check without DNS server edit host file in windows or where you can try to access nginx*
 *Add all server ip with ingress hostname*
 
-<img width="1442" height="617" alt="Screenshot 2026-02-23 151142" src="https://github.com/user-attachments/assets/ccb44bb6-d333-4308-b1fa-5af363f332cc" />
+<img width="1137" height="546" alt="image" src="https://github.com/user-attachments/assets/29de6a6d-2419-4012-a01a-9ebda130826a" />
+
 
 *URL accessible via Hostname*
 
-<img width="1594" height="848" alt="Screenshot 2026-02-23 151805" src="https://github.com/user-attachments/assets/5e3c62e7-00cd-4ba5-a36b-9f65921b67ca" />
+<img width="1596" height="843" alt="image" src="https://github.com/user-attachments/assets/a8266596-cd7b-4936-8184-c48305f329ec" />
+
 
 ---
 
