@@ -285,26 +285,41 @@ Service exposed via NodePort, accessible on all nodes.
 
 ### Lab Exercise 9 — Ingress (Optional Enhancement)
 
-*Before check controller pods*
+**Step 1 — Check Ingress Controller Pods (before deployment):**
 ```bash
 kubectl get pods -n ingress-nginx
 ```
 
+**Output (snippet):**
+
 <img width="939" height="68" alt="image" src="https://github.com/user-attachments/assets/82a1418a-d8f5-430e-86e0-0e25f27249b8" />
 
-*After deploying Ingress controller*
+**Explanation:**
+
+Initially, no ingress controller pods are running in the ingress-nginx namespace.
+
+**Step 2 — Deploy Ingress Controller:**
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
 ```
 
+**Output (snippet):**
+
 <img width="1443" height="375" alt="image" src="https://github.com/user-attachments/assets/c00c5429-b51f-4a1a-af75-54a66c25aa04" />
 
+**Explanation:**  
 
-# Create Ingress Resource (Master Only)
-*Edit Ignress.yaml config file*
+The NGINX ingress controller was deployed successfully. Pods in the ingress-nginx namespace transitioned to Running state.
+
+**Step 3 — Create Ingress Resource (Master Node):**
+
+**Edit Ignress.yaml config file**
+
 ```bash
 sudo nano ingress.yaml
 ```
+
+**Ingress YAML Configuration:**
 
 ```bash
 apiVersion: networking.k8s.io/v1
@@ -326,74 +341,59 @@ spec:
               number: 80
 ```
 
-*After save this file and apply ingress.yaml*
+**Apply Resource:**
 ```bash
 kubectl apply -f ingress.yaml
 ```
 
-*Now check URL hostname*
+**Verification Command:**
 ```bash
 kubectl get ingress
 ```
 
+**Output (snippet):**
+
 <img width="798" height="132" alt="image" src="https://github.com/user-attachments/assets/7109c2d9-c231-459c-9b05-1d08fe57b292" />
 
+**Explanation:**
 
-*Now check without DNS server edit host file in windows or where you can try to access nginx*
-*Add all server ip with ingress hostname*
+Ingress resource created successfully, routing traffic for hostname nginx.local to the nginx-test service on port 80.
+
+**Step 4 — Configure Host File (Windows or Client Machine):**
+
+Add all server IPs with ingress hostname nginx.local in the local host file.
 
 <img width="1137" height="546" alt="image" src="https://github.com/user-attachments/assets/29de6a6d-2419-4012-a01a-9ebda130826a" />
 
+**Explanation:**
 
-*URL accessible via Hostname*
+Since no DNS server was configured, the hostname was mapped manually in the host file to resolve nginx.local to cluster node IPs.
 
+**Step 5 — Access Application via Hostname:**
+
+Open browser and access:
+
+    http://nginx.local/
+    
 <img width="1596" height="843" alt="image" src="https://github.com/user-attachments/assets/a8266596-cd7b-4936-8184-c48305f329ec" />
 
+**Explanation:**
+
+Nginx application is now accessible via hostname nginx.local through the ingress controller, demonstrating production-style hostname routing.
 
 ---
 
-## ✅ Outcome
-- A fully functional Kubernetes cluster with networking and application deployment.
-- Demonstrates NodePort and hostname access.
-- Optional ingress routing for production-style traffic management.
+## ✅ Learning Outcomes
+- Built a Kubernetes cluster from scratch in my lab environment
+- Configured Calico networking for pod communication
+- Deployed and scaled Nginx across worker nodes
+- Exposed applications via NodePort for IP-based access
+- Configured Ingress for hostname-based routing
 
 ---
 
 ## 🚀 Future Work
-- Add TLS/HTTPS via Ingress.  
-- Deploy multiple apps and route via different paths/hosts.  
-- Automate setup with Ansible/Terraform.
-
----
-
-## Capture Verification Outputs
-*After each major step, run a verification command and screenshot it:*
-
-    Step 1: free -h → shows swap disabled
-
-    Step 2: systemctl status containerd → shows containerd running
-
-    Step 3: kubectl version --client → shows kubectl installed
-
-    Step 4: kubectl get nodes → shows master node
-
-    Step 5: kubectl get pods -n kube-system → shows Calico pods
-
-    Step 6: kubectl get nodes → shows all nodes Ready
-
-    Step 7: kubectl get pods -o wide → shows nginx pods
-
-    Step 8: Browser screenshot → Nginx accessible via IP/NodePort
-
-    Step 9: Browser screenshot → Nginx accessible via hostname
-
-
-
-
-
-
-
-
-
-
-
+- Add TLS/HTTPS via Ingress for secure traffic
+- Deploy multiple applications and route via different paths/hosts
+- Automate cluster setup with Ansible or Terraform
+- Integrate CI/CD pipelines for automated deployments
