@@ -181,9 +181,6 @@ kubectl get svc
 
 
 *URL Acesss:*
-- http://192.168.1.10:32188/
-- http://192.168.1.20:32188/
-- http://192.168.1.30:32188/
 
 <img width="1599" height="844" alt="image" src="https://github.com/user-attachments/assets/0cb78fe2-7881-4dbf-b73f-361b0f252eb1" />
 
